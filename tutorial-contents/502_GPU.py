@@ -18,10 +18,10 @@ BATCH_SIZE = 50
 LR = 0.001
 DOWNLOAD_MNIST = False
 
-train_data = torchvision.datasets.MNIST(root='./mnist/', train=True, transform=torchvision.transforms.ToTensor(), download=DOWNLOAD_MNIST,)
+train_data = torchvision.datasets.MNIST(root='./', train=True, transform=torchvision.transforms.ToTensor(), download=DOWNLOAD_MNIST,)
 train_loader = Data.DataLoader(dataset=train_data, batch_size=BATCH_SIZE, shuffle=True)
 
-test_data = torchvision.datasets.MNIST(root='./mnist/', train=False)
+test_data = torchvision.datasets.MNIST(root='./', train=False)
 
 # !!!!!!!! Change in here !!!!!!!!! #
 test_x = torch.unsqueeze(test_data.test_data, dim=1).type(torch.FloatTensor)[:2000].cuda()/255.   # Tensor on GPU
@@ -46,7 +46,7 @@ class CNN(nn.Module):
 cnn = CNN()
 
 # !!!!!!!! Change in here !!!!!!!!! #
-cnn.cuda()      # Moves all model parameters and buffers to the GPU.
+#cnn.cuda()      # Moves all model parameters and buffers to the GPU.
 
 optimizer = torch.optim.Adam(cnn.parameters(), lr=LR)
 loss_func = nn.CrossEntropyLoss()
